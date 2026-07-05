@@ -2,7 +2,7 @@
 
 Interactive 3-screen prototype of a fintech community feed, recreated pixel-faithfully from Figma.
 
-**Live demo:** https://randyvarianda.github.io/insight-feed-prototype/
+**Live demo:** https://randyvarianda.github.io/ajaib-feed-prototype/
 
 ## Screens
 1. **Feed (Insight - Trending)** — trending pills, post cards, stock widget, liked-by stacks
