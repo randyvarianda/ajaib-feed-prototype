@@ -220,6 +220,56 @@
   .tipe-feed span{font-weight:400;font-size:10px;line-height:16px;white-space:nowrap;}
   .compose-footer > .ph{width:24px;height:24px;color:var(--text-tertiary);}
 
+
+
+  /* ── Reply context chip + reply links ── */
+  .reply-context{display:none;align-items:center;justify-content:space-between;gap:8px;
+    font-size:12px;line-height:18px;color:var(--text-tertiary);}
+  .reply-context.active{display:flex;}
+  .reply-context b{font-weight:700;color:var(--text-secondary);}
+  .reply-cancel{background:none;border:none;padding:2px;display:flex;color:var(--text-tertiary);cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .reply-cancel .ph{width:14px;height:14px;}
+  .reply-link{background:none;border:none;padding:0;font-family:'Lato',sans-serif;
+    font-weight:700;font-size:12px;line-height:18px;color:var(--text-tertiary);cursor:pointer;
+    -webkit-tap-highlight-color:transparent;align-self:flex-start;}
+  .reply-link:active{color:var(--interactive-enabled);}
+
+
+  /* ── Profile screen ── */
+  .profile-hero{display:flex;flex-direction:column;gap:12px;padding:12px 16px;flex-shrink:0;background:#fff;border-bottom:1px solid var(--border-secondary);}
+  .profile-row{display:flex;gap:12px;align-items:flex-start;}
+  .avatar-68{width:68px;height:68px;border-radius:50%;overflow:hidden;flex-shrink:0;}
+  .avatar-68 svg{width:100%;height:100%;display:block;}
+  .profile-id{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;justify-content:center;align-self:stretch;}
+  .profile-name{font-weight:700;font-size:14px;line-height:20px;color:var(--text-primary);}
+  .badges-row{display:flex;gap:8px;align-items:center;}
+  .badge-labeled{display:flex;gap:2px;align-items:center;height:16px;font-weight:700;font-size:10px;line-height:16px;white-space:nowrap;}
+  .badge-labeled img{width:16px;height:16px;display:block;}
+  .badge-labeled.expert{color:var(--ajaib-blue-6);}
+  .badge-labeled.trader{color:var(--market-green);}
+  .joined{font-weight:400;font-size:10px;line-height:16px;color:var(--text-tertiary);}
+  .stats-row{display:flex;gap:12px;align-items:stretch;}
+  .stat{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .stat .num{font-weight:700;font-size:14px;line-height:20px;color:var(--text-primary);}
+  .stat .lbl{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);}
+  .vdiv{width:1px;background:var(--border-secondary);flex-shrink:0;}
+  .bio{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);}
+  .btn-follow-full{
+    width:100%;height:32px;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:4px;
+    background:var(--interactive-enabled);color:#fff;border:none;cursor:pointer;
+    font-family:'Lato',sans-serif;font-weight:700;font-size:14px;line-height:20px;transition:all .15s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-follow-full.following{background:#fff;border:1px solid var(--border-tertiary);color:var(--text-tertiary);}
+  .profile-pills{padding:16px 16px 4px;}
+  .profile-link{cursor:pointer;}
+
+  /* ── Empty comments state ── */
+  .empty-comments{display:flex;flex-direction:column;align-items:center;gap:4px;padding:48px 24px;text-align:center;}
+  .empty-comments .ph{width:48px;height:48px;color:var(--border-tertiary);margin-bottom:4px;}
+  .ec-title{font-weight:700;font-size:14px;line-height:20px;color:var(--text-primary);}
+  .ec-sub{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);}
+
   /* ── FAB ── */
   .fab{
     position:absolute;right:16px;bottom:16px;z-index:10;
@@ -382,6 +432,7 @@
   <symbol id="ph-globe" viewBox="0 0 256 256"><path d="M128,24h0A104,104,0,1,0,232,128,104.12,104.12,0,0,0,128,24Zm88,104a87.61,87.61,0,0,1-3.33,24H174.16a157.44,157.44,0,0,0,0-48h38.51A87.61,87.61,0,0,1,216,128ZM102,168H154a115.11,115.11,0,0,1-26,45A115.27,115.27,0,0,1,102,168Zm-3.9-16a140.84,140.84,0,0,1,0-48h59.88a140.84,140.84,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.84a157.44,157.44,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154,88H102a115.11,115.11,0,0,1,26-45A115.27,115.27,0,0,1,154,88Zm52.33,0H170.71a135.28,135.28,0,0,0-22.3-45.6A88.29,88.29,0,0,1,206.37,88ZM107.59,42.4A135.28,135.28,0,0,0,85.29,88H49.63A88.29,88.29,0,0,1,107.59,42.4ZM49.63,168H85.29a135.28,135.28,0,0,0,22.3,45.6A88.29,88.29,0,0,1,49.63,168Zm98.78,45.6a135.28,135.28,0,0,0,22.3-45.6h35.66A88.29,88.29,0,0,1,148.41,213.6Z"/></symbol>
   <symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
   <symbol id="ph-plus" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></symbol>
+  <symbol id="ph-x" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></symbol>
 </svg>
 
 <div class="screen" id="screen-feed">
@@ -441,13 +492,13 @@
   </div>
 
   <!-- ══ Post 1 — RatuBanteng ══ -->
-  <div class="post">
+  <div class="post" data-thread-id="main">
     <div class="post-header">
-      <div class="avatar-32 avatar-photo-1"></div>
+      <div class="avatar-32 avatar-photo-1 profile-link" onclick="openProfile('RatuBanteng','feed')"></div>
       <div class="post-name-col">
         <div class="post-name-row">
-          <span class="post-name">RatuBanteng</span>
-          <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+          <span class="post-name profile-link" onclick="openProfile('RatuBanteng','feed')">RatuBanteng</span>
+          <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
         </div>
         <span class="post-time">01 Sep 2023, 15:30</span>
       </div>
@@ -502,7 +553,7 @@
         </button>
         <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
           <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
-          <span class="count">20</span>
+          <span class="count c-count" data-count="20">20</span>
         </button>
       </div>
       <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
@@ -520,13 +571,13 @@
 
     <div class="comment-preview" onclick="openDetail()" role="button" tabindex="0" style="cursor:pointer;">
       <div class="comment-head">
-        <div class="avatar-32">
+        <div class="avatar-32 profile-link" onclick="event.stopPropagation();openProfile('ShirohigePirate','feed')">
           <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
         </div>
         <div class="post-name-col">
           <div class="post-name-row" style="gap:4px;">
-            <span class="comment-name">ShirohigePirate</span>
-            <span class="badge-16 badge-star"><svg class="ph"><use href="#ph-star-fill"/></svg></span>
+            <span class="comment-name profile-link" onclick="event.stopPropagation();openProfile('ShirohigePirate','feed')">ShirohigePirate</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Trader Aktif" style="width:16px;height:16px;display:block;"></span>
           </div>
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
@@ -540,11 +591,11 @@
   <!-- ══ Post 2 — Nikathesun ══ -->
   <div class="post">
     <div class="post-header">
-      <div class="avatar-32 avatar-photo-6"></div>
+      <div class="avatar-32 avatar-photo-6 profile-link" onclick="openProfile('Nikathesun','feed')"></div>
       <div class="post-name-col">
         <div class="post-name-row">
-          <span class="post-name">Nikathesun</span>
-          <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+          <span class="post-name profile-link" onclick="openProfile('Nikathesun','feed')">Nikathesun</span>
+          <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
         </div>
         <span class="post-time">01 Sep 2023, 15:30</span>
       </div>
@@ -591,10 +642,10 @@
   <!-- ══ Post 3 — kurohige ══ -->
   <div class="post">
     <div class="post-header">
-      <div class="avatar-32 avatar-photo-3"></div>
+      <div class="avatar-32 avatar-photo-3 profile-link" onclick="openProfile('kurohige','feed')"></div>
       <div class="post-name-col">
         <div class="post-name-row">
-          <span class="post-name">kurohige</span>
+          <span class="post-name profile-link" onclick="openProfile('kurohige','feed')">kurohige</span>
         </div>
         <span class="post-time">01 Sep 2023, 15:30</span>
       </div>
@@ -666,14 +717,15 @@
   </div>
 
   <div class="screen-scroll">
+   <div id="detail-post">
     <!-- Original post -->
     <div class="post">
       <div class="post-header">
-        <div class="avatar-32 avatar-photo-1"></div>
+        <div class="avatar-32 avatar-photo-1 profile-link" onclick="openProfile('RatuBanteng','detail')"></div>
         <div class="post-name-col">
           <div class="post-name-row">
-            <span class="post-name">RatuBanteng</span>
-            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+            <span class="post-name profile-link" onclick="openProfile('RatuBanteng','detail')">RatuBanteng</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
           </div>
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
@@ -728,7 +780,7 @@
           </button>
           <div class="engage-item">
             <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
-            <span class="count">20</span>
+            <span class="count c-count" data-count="20">20</span>
           </div>
         </div>
         <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
@@ -745,16 +797,18 @@
       </div>
     </div>
 
+   </div><!-- /detail-post -->
+   <div id="detail-comments">
     <!-- Comment 1 + author reply -->
     <div class="comment-block">
       <div class="post-header">
-        <div class="avatar-32">
+        <div class="avatar-32 profile-link" onclick="openProfile('ShirohigePirate','detail')">
           <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
         </div>
         <div class="post-name-col">
           <div class="post-name-row">
-            <span class="post-name">ShirohigePirate</span>
-            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+            <span class="post-name profile-link" onclick="openProfile('ShirohigePirate','detail')">ShirohigePirate</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
           </div>
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
@@ -771,16 +825,16 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
+          <button class="comment-btn" onclick="focusReply('ShirohigePirate',this)" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
 
       <div class="post-header indent">
-        <div class="avatar-32 avatar-photo-1"></div>
+        <div class="avatar-32 avatar-photo-1 profile-link" onclick="openProfile('RatuBanteng','detail')"></div>
         <div class="post-name-col">
           <div class="post-name-row">
-            <span class="post-name">RatuBanteng</span>
-            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+            <span class="post-name profile-link" onclick="openProfile('RatuBanteng','detail')">RatuBanteng</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
             <span class="author-tag">•&nbsp;<b>Penulis</b></span>
           </div>
           <span class="post-time">01 Sep 2023, 15:30</span>
@@ -788,6 +842,7 @@
         <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
       </div>
       <p class="comment-text indent"><b>@ShirohigePirate</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <button class="reply-link indent" onclick="focusReply('RatuBanteng',this)">Balas</button>
 
       <div class="see-replies indent">
         <div class="liked-avatars">
@@ -802,9 +857,9 @@
     <!-- Comment 2 -->
     <div class="comment-block">
       <div class="post-header">
-        <div class="avatar-32 avatar-photo-3"></div>
+        <div class="avatar-32 avatar-photo-3 profile-link" onclick="openProfile('kurohige','detail')"></div>
         <div class="post-name-col">
-          <div class="post-name-row"><span class="post-name">kurohige</span></div>
+          <div class="post-name-row"><span class="post-name profile-link" onclick="openProfile('kurohige','detail')">kurohige</span></div>
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
         <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
@@ -820,7 +875,7 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
+          <button class="comment-btn" onclick="focusReply('kurohige',this)" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
     </div>
@@ -828,9 +883,9 @@
     <!-- Comment 3 -->
     <div class="comment-block">
       <div class="post-header">
-        <div class="avatar-32 avatar-photo-6"></div>
+        <div class="avatar-32 avatar-photo-6 profile-link" onclick="openProfile('Nikathesun','detail')"></div>
         <div class="post-name-col">
-          <div class="post-name-row"><span class="post-name">Nikathesun</span></div>
+          <div class="post-name-row"><span class="post-name profile-link" onclick="openProfile('Nikathesun','detail')">Nikathesun</span></div>
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
         <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
@@ -846,14 +901,21 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
+          <button class="comment-btn" onclick="focusReply('Nikathesun',this)" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
     </div>
+   </div><!-- /detail-comments -->
   </div><!-- /screen-scroll (detail) -->
 
   <!-- Footer composer -->
   <div class="footer-compose">
+    <div class="reply-context" id="reply-context">
+      <span>Membalas <b id="reply-context-name"></b></span>
+      <button class="reply-cancel" onclick="cancelReply()" aria-label="Batal membalas">
+        <svg class="ph"><use href="#ph-x"/></svg>
+      </button>
+    </div>
     <input id="reply-input" type="text" maxlength="5000" placeholder="Tulis komentar di sini..." autocomplete="off">
     <div class="compose-row">
       <svg class="ph"><use href="#ph-currency-dollar-simple"/></svg>
@@ -908,15 +970,213 @@
   </div>
 </div><!-- /screen-compose -->
 
+<!-- ══════════ Screen 4 — Profil (node 22:1634) ══════════ -->
+<div class="screen" id="screen-profile" hidden>
+  <div class="topbar-light" style="border-bottom:none;">
+    <div class="statusbar">
+      <svg class="ph"><use href="#ph-wifi-high-fill"/></svg>
+      <svg class="ph"><use href="#ph-cell-signal-full-fill"/></svg>
+      <svg class="ph"><use href="#ph-battery-full-fill"/></svg>
+      <span class="time">12:30</span>
+    </div>
+    <div class="title-area-light">
+      <button class="back-btn" onclick="closeProfile()" aria-label="Kembali">
+        <svg class="ph"><use href="#ph-caret-left"/></svg>
+      </button>
+      <div class="title-spacer"></div>
+      <span class="ic-24" style="margin:8px;"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+    </div>
+  </div>
+
+  <div class="screen-scroll">
+    <div class="profile-hero">
+      <div class="profile-row">
+        <div class="avatar-68" id="profile-avatar"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>
+        <div class="profile-id">
+          <span class="profile-name" id="profile-name">ShirohigePirate</span>
+          <div class="badges-row">
+            <span class="badge-labeled expert" id="badge-ahli"><img src="data:image/png;base64,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" alt="">Ahli</span>
+            <span class="badge-labeled trader" id="badge-trader"><img src="data:image/png;base64,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" alt="">Trader Aktif</span>
+          </div>
+          <span class="joined" id="profile-joined">Bergabung 11 January 2022</span>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="num" id="st-posts">12</span><span class="lbl">Postingan</span></div>
+        <div class="vdiv"></div>
+        <div class="stat"><span class="num" id="st-followers">4.486</span><span class="lbl">Pengikut</span></div>
+        <div class="vdiv"></div>
+        <div class="stat"><span class="num" id="st-following">4.485</span><span class="lbl">Mengikuti</span></div>
+      </div>
+      <p class="bio" id="profile-bio">…</p>
+      <button class="btn-follow-full" id="profile-follow" aria-pressed="false">Ikuti</button>
+    </div>
+
+    <div class="pills profile-pills">
+      <div class="pills-scroll">
+        <div class="pill pill-active">Semua</div>
+        <div class="pill pill-default">Ide</div>
+        <div class="pill pill-default">Trade Plan</div>
+        <div class="pill pill-default">Disimpan</div>
+        <div class="pill pill-default">Grafik</div>
+        <div class="pill pill-default">Prediksi</div>
+        <div class="pill pill-default">Polling</div>
+        <div class="pill pill-default">Disukai</div>
+      </div>
+    </div>
+
+<div id="profile-posts">
+    <div class="post" data-thread-id="sp1">
+      <div class="post-header">
+        <div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>
+        <div class="post-name-col">
+          <div class="post-name-row">
+            <span class="post-name">ShirohigePirate</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <div class="post-actions">
+          <button class="follow" aria-pressed="false">+ Ikuti</button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+        </div>
+      </div>
+      <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+      <div class="stock-widget">
+        <div class="stock-head">
+          <span class="bank-logo" title="Bank Central Asia"><svg viewBox="0 0 40 18" style="width:15px;display:block;"><text x="20" y="14" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="15" fill="#0060AF" letter-spacing="-0.5">BCA</text></svg></span>
+          <div class="stock-title">
+            <span class="stock-ticker">BBCA</span>
+            <span class="stock-company">Bank Central Asia</span>
+          </div>
+          <span class="stock-time">01 Sep 2024, 13:42:60</span>
+        </div>
+        <div class="divider"></div>
+        <div class="order-type"><span class="label">Harga</span><span class="value">Rp8.000</span></div>
+        <div class="divider"></div>
+        <div class="stock-foot">
+          <div class="price-row">
+            <span class="price">8.050</span>
+            <div class="price-move"><svg class="ph"><use href="#ph-caret-up-fill"/></svg><span class="price-delta">100 (+13%)</span></div>
+          </div>
+          <button class="btn-beli">Beli</button>
+        </div>
+      </div>
+      <div class="chip-row"><div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div></div>
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24"><svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg><svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg><span class="burst"></span></span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <button class="engage-item comment-btn" onclick="openDetail('sp1')" aria-label="Lihat komentar">
+            <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+            <span class="count c-count" data-count="20">20</span>
+          </button>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+      </div>
+      <div class="liked-by">
+        <div class="liked-avatars">
+          <div class="avatar-18 stacked avatar-photo-4"></div>
+          <div class="avatar-18 stacked avatar-photo-5"></div>
+          <div class="avatar-18 avatar-photo-2"></div>
+        </div>
+        <span class="liked-text">Disukai oleh</span>
+        <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+      </div>
+    </div>
+    <div class="post" data-thread-id="sp2">
+      <div class="post-header">
+        <div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>
+        <div class="post-name-col">
+          <div class="post-name-row">
+            <span class="post-name">ShirohigePirate</span>
+            <span class="badge-16"><img src="data:image/png;base64,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" alt="Expert" style="width:16px;height:16px;display:block;"></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <div class="post-actions">
+          <button class="follow" aria-pressed="false">+ Ikuti</button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+        </div>
+      </div>
+      <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+      <div class="stock-widget">
+        <div class="stock-head">
+          <span class="bank-logo" title="Bank Central Asia"><svg viewBox="0 0 40 18" style="width:15px;display:block;"><text x="20" y="14" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="15" fill="#0060AF" letter-spacing="-0.5">BCA</text></svg></span>
+          <div class="stock-title">
+            <span class="stock-ticker">BBCA</span>
+            <span class="stock-company">Bank Central Asia</span>
+          </div>
+          <span class="stock-time">01 Sep 2024, 13:42:60</span>
+        </div>
+        <div class="divider"></div>
+        <div class="order-type"><span class="label">Harga</span><span class="value">Rp8.000</span></div>
+        <div class="divider"></div>
+        <div class="stock-foot">
+          <div class="price-row">
+            <span class="price">8.050</span>
+            <div class="price-move"><svg class="ph"><use href="#ph-caret-up-fill"/></svg><span class="price-delta">100 (+13%)</span></div>
+          </div>
+          <button class="btn-beli">Beli</button>
+        </div>
+      </div>
+      <div class="chip-row"><div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div></div>
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24"><svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg><svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg><span class="burst"></span></span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <button class="engage-item comment-btn" onclick="openDetail('sp2')" aria-label="Lihat komentar">
+            <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+            <span class="count c-count" data-count="20">20</span>
+          </button>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+      </div>
+      <div class="liked-by">
+        <div class="liked-avatars">
+          <div class="avatar-18 stacked avatar-photo-4"></div>
+          <div class="avatar-18 stacked avatar-photo-5"></div>
+          <div class="avatar-18 avatar-photo-2"></div>
+        </div>
+        <span class="liked-text">Disukai oleh</span>
+        <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+      </div>
+    </div>
+</div><!-- /profile-posts -->
+  </div><!-- /screen-scroll (profile) -->
+</div><!-- /screen-profile -->
+
+
 
 <script>
-document.querySelectorAll('.follow').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var on = btn.classList.toggle('following');
-    btn.setAttribute('aria-pressed', on);
-    btn.textContent = on ? 'Diikuti' : '+ Ikuti';
-  });
-});
+/* ── helpers ── */
+function fmtText(text){
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\$([A-Za-z]+)/g,'<span class="cashtag">$$$1</span>')
+    .replace(/@(\w+)/g,'<b>@$1</b>');
+}
+function nowStamp(){
+  var now=new Date();
+  var months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  return ('0'+now.getDate()).slice(-2)+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+}
+function likeBtnHtml(){
+  return '<button class="like-btn" aria-pressed="false" aria-label="Suka"><span class="ic-24">'+
+    '<svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>'+
+    '<svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>'+
+    '<span class="burst"></span></span><span class="count" data-count="0">0</span></button>';
+}
+function emptyStateHtml(){
+  return '<div class="empty-comments"><svg class="ph"><use href="#ph-chat-circle"/></svg>'+
+    '<p class="ec-title">Belum ada komentar</p>'+
+    '<p class="ec-sub">Jadilah yang pertama memberikan komentar.</p></div>';
+}
+
+/* ── bindings ── */
 function bindLike(btn){
   btn.addEventListener('click', function(){
     var liked = btn.classList.toggle('liked');
@@ -928,8 +1188,60 @@ function bindLike(btn){
     if (liked) { void btn.offsetWidth; btn.classList.add('pop'); }
   });
 }
+function bindFollow(btn){
+  btn.addEventListener('click', function(){
+    var on = btn.classList.toggle('following');
+    btn.setAttribute('aria-pressed', on);
+    btn.textContent = on ? 'Diikuti' : '+ Ikuti';
+  });
+}
+function bindDetailScreen(){
+  document.querySelectorAll('#screen-detail .like-btn').forEach(bindLike);
+  document.querySelectorAll('#screen-detail .follow').forEach(bindFollow);
+}
 document.querySelectorAll('.like-btn').forEach(bindLike);
+document.querySelectorAll('.follow').forEach(bindFollow);
 
+/* ── thread store ── */
+var threads={}, currentThread='main', postSeq=0;
+threads.main={
+  post:document.getElementById('detail-post').innerHTML,
+  comments:document.getElementById('detail-comments').innerHTML
+};
+function saveThread(){
+  threads[currentThread]={
+    post:document.getElementById('detail-post').innerHTML,
+    comments:document.getElementById('detail-comments').innerHTML
+  };
+}
+function loadThread(id){
+  saveThread();
+  currentThread=id;
+  document.getElementById('detail-post').innerHTML=threads[id].post;
+  document.getElementById('detail-comments').innerHTML=threads[id].comments;
+  bindDetailScreen();
+}
+
+/* ── navigation ── */
+function showDetail(){
+  var d=document.getElementById('screen-detail');
+  document.getElementById('screen-feed').hidden=true;
+  document.getElementById('screen-compose').hidden=true;
+  document.getElementById('screen-profile').hidden=true;
+  d.hidden=false;
+  d.classList.remove('enter','enter-back'); void d.offsetWidth; d.classList.add('enter');
+  d.querySelector('.screen-scroll').scrollTop=0;
+}
+function openDetail(threadId){
+  loadThread(threadId||'main');
+  showDetail();
+}
+function closeDetail(){
+  document.getElementById('screen-detail').hidden=true;
+  var f=document.getElementById('screen-feed');
+  f.hidden=false;
+  f.classList.remove('enter','enter-back'); void f.offsetWidth; f.classList.add('enter-back');
+}
 function openCompose(){
   document.getElementById('screen-feed').hidden=true;
   var c=document.getElementById('screen-compose');
@@ -943,6 +1255,133 @@ function closeCompose(){
   f.hidden=false;
   f.classList.remove('enter','enter-back'); void f.offsetWidth; f.classList.add('enter-back');
 }
+var replyTarget=null;
+function setReplyChip(name){
+  var chip=document.getElementById('reply-context');
+  if(name){
+    document.getElementById('reply-context-name').textContent='@'+name;
+    chip.classList.add('active');
+  } else {
+    chip.classList.remove('active');
+  }
+}
+var profileReturn='feed';
+var USERS={
+ 'RatuBanteng':{badges:['expert'],joined:'Bergabung 03 Maret 2021',stats:['48','12,4K','201'],bio:'Value investor & swing trader. Fokus di sektor perbankan dan energi. DYOR selalu. 📊',av:'avatar-photo-1'},
+ 'Nikathesun':{badges:['expert'],joined:'Bergabung 17 Agustus 2022',stats:['35','2.310','180'],bio:'Market recap harian IHSG. Analisis teknikal sederhana untuk trader pemula. 📈',av:'avatar-photo-6'},
+ 'kurohige':{badges:[],joined:'Bergabung 09 Juni 2023',stats:['21','356','98'],bio:'Dividend hunter. Long term investor, anti FOMO. 🌱',av:'avatar-photo-3'},
+ 'ShirohigePirate':{badges:['expert','trader'],joined:'Bergabung 11 January 2022',stats:['12','4.486','4.485'],bio:'Full time Traveller Parttime Trader | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loremsd',av:null},
+ 'userprofile':{badges:[],joined:'Bergabung 05 Juli 2026',stats:['0','0','0'],bio:'Investor pemula di Ajaib. 🚀',av:null,display:'@userprofile',self:true}
+};
+var SP_POSTS=null;
+function openProfile(name, from){
+  profileReturn=from||'feed';
+  var u=USERS[name]||USERS['ShirohigePirate'];
+  if(SP_POSTS===null) SP_POSTS=document.getElementById('profile-posts').innerHTML;
+  document.getElementById('profile-name').textContent=u.display||name;
+  document.getElementById('badge-ahli').style.display=u.badges.indexOf('expert')>-1?'flex':'none';
+  document.getElementById('badge-trader').style.display=u.badges.indexOf('trader')>-1?'flex':'none';
+  document.getElementById('profile-joined').textContent=u.joined;
+  document.getElementById('profile-bio').textContent=u.bio;
+  document.getElementById('st-followers').textContent=u.stats[1];
+  document.getElementById('st-following').textContent=u.stats[2];
+  var avEl=document.getElementById('profile-avatar');
+  if(u.av){ avEl.className='avatar-68 '+u.av; avEl.innerHTML=''; }
+  else { avEl.className='avatar-68'; avEl.innerHTML='<svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>'; }
+  var pf=document.getElementById('profile-follow');
+  pf.style.display=u.self?'none':'flex';
+  pf.classList.remove('following'); pf.setAttribute('aria-pressed','false'); pf.textContent='Ikuti';
+  var wrap=document.getElementById('profile-posts');
+  if(name==='ShirohigePirate'){
+    wrap.innerHTML=SP_POSTS;
+    document.getElementById('st-posts').textContent=u.stats[0];
+  } else {
+    var html='', count=0;
+    document.querySelectorAll('#screen-feed .post').forEach(function(p){
+      var n=p.querySelector('.post-name');
+      if(n && n.textContent.replace(/^@/,'')===name.replace(/^@/,'')){
+        html+='<div class="post">'+p.innerHTML+'</div>'; count++;
+      }
+    });
+    wrap.innerHTML=html||'<div class="empty-comments"><svg class="ph"><use href="#ph-chat-circle"/></svg><p class="ec-title">Belum ada postingan</p><p class="ec-sub">Postingan pengguna akan muncul di sini.</p></div>';
+    document.getElementById('st-posts').textContent=u.self?String(count):u.stats[0];
+  }
+  wrap.querySelectorAll('.like-btn').forEach(bindLike);
+  wrap.querySelectorAll('.follow').forEach(bindFollow);
+  document.getElementById('screen-feed').hidden=true;
+  document.getElementById('screen-detail').hidden=true;
+  document.getElementById('screen-compose').hidden=true;
+  var p=document.getElementById('screen-profile');
+  p.hidden=false;
+  p.classList.remove('enter','enter-back'); void p.offsetWidth; p.classList.add('enter');
+  p.querySelector('.screen-scroll').scrollTop=0;
+}
+function closeProfile(){
+  document.getElementById('screen-profile').hidden=true;
+  var t=document.getElementById(profileReturn==='detail'?'screen-detail':'screen-feed');
+  t.hidden=false;
+  t.classList.remove('enter','enter-back'); void t.offsetWidth; t.classList.add('enter-back');
+}
+function focusReply(name, el){
+  var i=document.getElementById('reply-input');
+  replyTarget=(name && el) ? el.closest('.comment-block') : null;
+  if(name && replyTarget){
+    name=String(name).replace(/^@/,'');
+    setReplyChip(name);
+    var mention='@'+name+' ';
+    i.value=i.value.replace(/^@\w+\s/,'');
+    i.value=mention+i.value;
+    i.dispatchEvent(new Event('input'));
+  } else {
+    setReplyChip(null);
+  }
+  i.focus();
+  i.setSelectionRange(i.value.length,i.value.length);
+}
+function cancelReply(){
+  replyTarget=null;
+  setReplyChip(null);
+  var i=document.getElementById('reply-input');
+  i.value=i.value.replace(/^@\w+\s/,'');
+  i.dispatchEvent(new Event('input'));
+  i.focus();
+}
+
+/* ── create post ── */
+function postCardHtml(esc, stamp, forDetail, threadId){
+  var commentBtn = forDetail
+    ? '<button class="engage-item comment-btn" onclick="focusReply()" aria-label="Balas">'+
+      '<span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>'+
+      '<span class="count c-count" data-count="0"></span></button>'
+    : '<button class="engage-item comment-btn" onclick="openDetail(\''+threadId+'\')" aria-label="Lihat komentar">'+
+      '<span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>'+
+      '<span class="count c-count" data-count="0"></span></button>';
+  return '<div class="post-header">'+
+    '<div class="avatar-32 profile-link" onclick="openProfile(&quot;userprofile&quot;,&quot;'+(typeof forDetail!=='undefined'&&forDetail?'detail':'feed')+'&quot;)"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>'+
+    '<div class="post-name-col"><div class="post-name-row"><span class="post-name profile-link" onclick="openProfile(&quot;userprofile&quot;,&quot;detail&quot;)">@userprofile</span></div>'+
+    '<span class="post-time">'+stamp+'</span></div>'+
+    '<span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span></div>'+
+    '<p class="post-text">'+esc+'</p>'+
+    '<div class="engage"><div class="engage-left">'+likeBtnHtml()+commentBtn+
+    '</div><span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span></div>';
+}
+function addPostToFeed(text){
+  var esc=fmtText(text), stamp=nowStamp(), id='p'+(++postSeq);
+  var post=document.createElement('div');
+  post.className='post';
+  post.setAttribute('data-thread-id', id);
+  post.innerHTML=postCardHtml(esc, stamp, false, id);
+  var composer=document.querySelector('#screen-feed .composer');
+  composer.parentNode.insertBefore(post, composer.nextElementSibling);
+  bindLike(post.querySelector('.like-btn'));
+  threads[id]={
+    post:'<div class="post" style="border-bottom:1px solid var(--border-secondary);">'+postCardHtml(esc, stamp, true, id)+'</div>',
+    comments:emptyStateHtml()
+  };
+  return id;
+}
+
+/* ── compose screen ── */
 var composeInput=document.getElementById('compose-input'),
     composeCount=document.getElementById('compose-count'),
     btnPosting=document.getElementById('btn-posting');
@@ -960,47 +1399,11 @@ btnPosting.addEventListener('click',function(){
   closeCompose();
   document.querySelector('#screen-feed .screen-scroll').scrollTop=0;
 });
-function addPostToFeed(text){
-  var esc=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\$([A-Za-z]+)/g,'<span class="cashtag">$$$1</span>');
-  var now=new Date();
-  var months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-  var stamp=('0'+now.getDate()).slice(-2)+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
-  var post=document.createElement('div');
-  post.className='post';
-  post.innerHTML='<div class="post-header">'+
-    '<div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>'+
-    '<div class="post-name-col"><div class="post-name-row"><span class="post-name">@userprofile</span></div>'+
-    '<span class="post-time">'+stamp+'</span></div>'+
-    '<span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span></div>'+
-    '<p class="post-text">'+esc+'</p>'+
-    '<div class="engage"><div class="engage-left">'+
-    '<button class="like-btn" aria-pressed="false" aria-label="Suka"><span class="ic-24">'+
-    '<svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>'+
-    '<svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>'+
-    '<span class="burst"></span></span><span class="count" data-count="0">0</span></button>'+
-    '<span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>'+
-    '</div><span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span></div>';
-  var list=document.querySelector('#screen-feed .composer').nextElementSibling;
-  document.querySelector('#screen-feed .composer').parentNode.insertBefore(post, list);
-  bindLike(post.querySelector('.like-btn'));
-}
-function focusReply(){
-  var i=document.getElementById('reply-input');
-  i.focus();
-}
-function openDetail(){
-  var f=document.getElementById('screen-feed'), d=document.getElementById('screen-detail');
-  f.hidden=true; d.hidden=false;
-  d.classList.remove('enter','enter-back'); void d.offsetWidth; d.classList.add('enter');
-  d.querySelector('.screen-scroll').scrollTop=0;
-}
-function closeDetail(){
-  var f=document.getElementById('screen-feed'), d=document.getElementById('screen-detail');
-  d.hidden=true; f.hidden=false;
-  f.classList.remove('enter','enter-back'); void f.offsetWidth; f.classList.add('enter-back');
-}
-var input=document.getElementById('reply-input'), counter=document.getElementById('char-count'), balas=document.getElementById('btn-balas');
+
+/* ── reply composer ── */
+var input=document.getElementById('reply-input'),
+    counter=document.getElementById('char-count'),
+    balas=document.getElementById('btn-balas');
 input.addEventListener('input', function(){
   counter.textContent=input.value.length+'/5000';
   var has=input.value.trim().length>0;
@@ -1009,9 +1412,70 @@ input.addEventListener('input', function(){
 });
 balas.addEventListener('click', function(){
   if(balas.disabled) return;
+  addCommentToThread(input.value.trim());
   input.value=''; counter.textContent='0/5000';
   balas.disabled=true; balas.classList.remove('enabled');
 });
+function addCommentToThread(text){
+  if(replyTarget){
+    var reply=document.createElement('div');
+    reply.style.cssText='display:flex;flex-direction:column;gap:8px;';
+    reply.innerHTML='<div class="post-header indent">'+
+      '<div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>'+
+      '<div class="post-name-col"><div class="post-name-row"><span class="post-name">@userprofile</span></div>'+
+      '<span class="post-time">'+nowStamp()+'</span></div>'+
+      '<span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span></div>'+
+      '<p class="comment-text indent">'+fmtText(text)+'</p>'+
+      '<button class="reply-link indent" onclick="focusReply(&quot;userprofile&quot;,this)">Balas</button>';
+    var see=replyTarget.querySelector('.see-replies');
+    if(see){ replyTarget.insertBefore(reply, see); } else { replyTarget.appendChild(reply); }
+    bumpCommentCount();
+    reply.scrollIntoView({behavior:'smooth',block:'center'});
+    replyTarget=null;
+    setReplyChip(null);
+    return;
+  }
+  var dc=document.getElementById('detail-comments');
+  var empty=dc.querySelector('.empty-comments');
+  if(empty) empty.remove();
+  var block=document.createElement('div');
+  block.className='comment-block';
+  block.innerHTML='<div class="post-header">'+
+    '<div class="avatar-32 profile-link" onclick="openProfile(&quot;userprofile&quot;,&quot;detail&quot;)"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>'+
+    '<div class="post-name-col"><div class="post-name-row"><span class="post-name profile-link" onclick="openProfile(&quot;userprofile&quot;,&quot;detail&quot;)">@userprofile</span></div>'+
+    '<span class="post-time">'+nowStamp()+'</span></div>'+
+    '<span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span></div>'+
+    '<p class="comment-text">'+fmtText(text)+'</p>'+
+    '<div class="engage"><div class="engage-left">'+likeBtnHtml()+
+    '<button class="comment-btn" onclick="focusReply(&quot;userprofile&quot;,this)" aria-label="Balas">'+
+    '<span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>'+
+    '</div></div>';
+  dc.appendChild(block);
+  bindLike(block.querySelector('.like-btn'));
+  bumpCommentCount();
+  var sc=document.querySelector('#screen-detail .screen-scroll');
+  sc.scrollTo({top:sc.scrollHeight,behavior:'smooth'});
+}
+['sp1','sp2'].forEach(function(id){
+  var el=document.querySelector('.post[data-thread-id="'+id+'"]');
+  if(el) threads[id]={post:'<div class="post">'+el.innerHTML+'</div>', comments:emptyStateHtml()};
+});
+var pf=document.getElementById('profile-follow');
+pf.addEventListener('click',function(){
+  var on=pf.classList.toggle('following');
+  pf.setAttribute('aria-pressed',on);
+  pf.textContent=on?'Diikuti':'Ikuti';
+});
+function bumpCommentCount(){
+  [document.querySelector('#detail-post .c-count'),
+   document.querySelector('.post[data-thread-id="'+currentThread+'"] .c-count')
+  ].forEach(function(el){
+    if(!el) return;
+    var n=(parseInt(el.dataset.count,10)||0)+1;
+    el.dataset.count=n;
+    el.textContent=n;
+  });
+}
 </script>
 </body>
 </html>
