@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insight - Trending</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --interactive-enabled:#3A83F9;
+    --bg-blue-variant:#165BCC;
+    --decorative-blue-variant:#E1F2FA;
+    --text-primary:#06090D;
+    --text-secondary:#171F2C;
+    --text-tertiary:#445B70;
+    --text-subdued:#A9BCC7;
+    --border-secondary:#E3E8EA;
+    --border-tertiary:#C9D5DB;
+    --surface-secondary:#F4F6F6;
+    --market-green:#2F9D5B;
+    --ajaib-blue-6:#165BCC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:#e9edf0;
+    font-family:'Lato',sans-serif;
+    display:flex;justify-content:center;
+    padding:24px 0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .screen{
+    width:360px;
+    background:#fff;
+    display:flex;flex-direction:column;
+    box-shadow:0 4px 24px rgba(6,9,13,.12);
+    overflow:hidden;
+  }
+  .ph{display:block;flex-shrink:0;fill:currentColor;}
+
+  /* ── Top bar ─────────────────────────── */
+  .topbar{background:var(--interactive-enabled);display:flex;flex-direction:column;}
+  .statusbar{
+    height:24px;display:flex;align-items:center;justify-content:flex-end;
+    gap:5px;padding-right:8px;color:#fff;
+  }
+  .statusbar .ph{width:14px;height:14px;opacity:.95;}
+  .statusbar .time{
+    font-family:'Roboto',sans-serif;font-weight:500;font-size:14px;line-height:16px;
+    color:#fff;opacity:.9;width:36px;text-align:right;margin-left:3px;
+  }
+  .title-area{display:flex;align-items:center;padding:0 8px;}
+  .search-wrapper{flex:1;display:flex;align-items:center;gap:8px;height:52px;padding:0 8px;min-width:0;}
+  .search{
+    flex:1;display:flex;align-items:center;gap:8px;height:40px;
+    padding:12px 8px;background:var(--bg-blue-variant);border-radius:8px;min-width:0;
+    color:var(--decorative-blue-variant);
+  }
+  .search .ph{width:20px;height:20px;}
+  .search p{font-size:14px;line-height:20px;font-weight:400;color:var(--decorative-blue-variant);flex:1;min-width:0;}
+  .action-40{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;}
+  .action-40 .ph{width:24px;height:24px;}
+
+  /* ── Tabs ────────────────────────────── */
+  .tabs{
+    background:#fff;border-bottom:1px solid var(--border-secondary);
+    display:flex;gap:16px;padding:0 16px;align-items:flex-end;overflow:hidden;
+  }
+  .tab{flex:1;height:40px;display:flex;flex-direction:column;align-items:center;min-width:0;}
+  .tab .label{flex:1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;line-height:20px;text-align:center;white-space:nowrap;}
+  .tab.active .label{color:var(--interactive-enabled);}
+  .tab:not(.active) .label{color:var(--text-tertiary);}
+  .tab .highlight{height:4px;width:100%;border-radius:4px 4px 0 0;flex-shrink:0;}
+  .tab.active .highlight{background:var(--interactive-enabled);}
+
+  /* ── Composer ────────────────────────── */
+  .composer{display:flex;flex-direction:column;gap:16px;padding:12px 16px;width:100%;}
+  .composer-row{display:flex;gap:8px;align-items:flex-start;width:100%;}
+  .avatar-40{width:40px;height:40px;flex-shrink:0;position:relative;}
+  .avatar-40 img,.avatar-40 svg{position:absolute;inset:0;width:100%;height:100%;}
+  .text-field{
+    flex:1;min-width:0;height:40px;display:flex;align-items:center;gap:8px;
+    padding:12px 16px;background:#fff;border:1px solid var(--border-tertiary);border-radius:4px;
+  }
+  .text-field p{
+    flex:1;min-width:0;font-size:14px;line-height:20px;font-weight:400;color:var(--text-subdued);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+
+  /* ── Pills ───────────────────────────── */
+  .pills{display:flex;gap:4px;align-items:center;width:100%;}
+  .pill{
+    display:flex;gap:4px;align-items:center;padding:8px;border-radius:8px;
+    font-weight:700;font-size:12px;line-height:18px;white-space:nowrap;flex-shrink:0;
+  }
+  .pill-filter{background:#fff;color:var(--text-tertiary);}
+  .pill-filter .ph{width:18px;height:18px;}
+  .pill-active{background:var(--decorative-blue-variant);border:1px solid var(--interactive-enabled);color:var(--text-primary);}
+  .pill-default{border:1px solid var(--border-tertiary);color:var(--text-tertiary);}
+  .pills-scroll{flex:1;min-width:0;display:flex;gap:4px;align-items:center;overflow:hidden;}
+
+  /* ── Post card ───────────────────────── */
+  .post{
+    display:flex;flex-direction:column;gap:8px;padding:12px 16px;width:100%;
+    background:#fff;border-bottom:1px solid var(--border-secondary);
+  }
+  .post-header{display:flex;gap:12px;align-items:center;width:100%;}
+  .avatar-32{width:32px;height:32px;border-radius:40px;overflow:hidden;flex-shrink:0;position:relative;}
+  .avatar-32 img,.avatar-32 svg{position:absolute;inset:0;width:100%;height:100%;}
+  .avatar-photo-1{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%23165BCC%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3ERB%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .avatar-photo-2{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%232F9D5B%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3ECI%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .avatar-photo-3{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%23244F8E%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3EK%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .avatar-photo-4{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%2359A8FF%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3EDA%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .avatar-photo-5{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%237AA0D7%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2214%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3EMS%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .avatar-photo-6{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2220%22%20fill%3D%22%233A83F9%22%2F%3E%3Ctext%20x%3D%2220%22%20y%3D%2220%22%20dy%3D%220.36em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%23FFFFFF%22%20letter-spacing%3D%220.5%22%3EN%3C%2Ftext%3E%3C%2Fsvg%3E") center/cover no-repeat;}
+  .post-name-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;justify-content:center;}
+  .post-name-row{display:flex;gap:2px;align-items:center;}
+  .post-name{font-weight:700;font-size:14px;line-height:20px;color:var(--text-primary);white-space:nowrap;}
+  .post-time{font-weight:400;font-size:10px;line-height:16px;color:var(--text-tertiary);white-space:nowrap;}
+  .post-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+  .follow{
+    font-weight:700;font-size:12px;line-height:18px;color:var(--interactive-enabled);white-space:nowrap;
+    background:none;border:none;padding:0;cursor:pointer;font-family:'Lato',sans-serif;
+    -webkit-tap-highlight-color:transparent;transition:color .15s;
+  }
+  .follow.following{color:var(--text-tertiary);}
+  .ic-24{width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-tertiary);}
+  .ic-24 .ph{width:24px;height:24px;}
+
+  /* Badges (Phosphor, 16px) */
+  .badge-16{width:16px;height:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .badge-16 .ph{width:16px;height:16px;}
+  .badge-expert{color:var(--ajaib-blue-6);}
+  .badge-star{color:var(--market-green);}
+
+  /* Post body */
+  .post-text{font-weight:400;font-size:14px;line-height:24px;color:var(--text-primary);width:100%;}
+  .post-text .cashtag{color:var(--ajaib-blue-6);}
+
+  /* Stock widget */
+  .stock-widget{
+    display:flex;flex-direction:column;gap:8px;justify-content:center;width:100%;
+    padding:12px;background:#fff;border:1px solid var(--border-secondary);border-radius:12px;
+  }
+  .stock-head{display:flex;gap:8px;align-items:center;width:100%;}
+  .stock-head img.logo{width:20px;height:20px;display:block;flex-shrink:0;}
+  .stock-title{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+  .stock-ticker{font-weight:900;font-size:14px;line-height:20px;color:var(--text-primary);}
+  .stock-company{font-weight:400;font-size:10px;line-height:16px;color:var(--text-tertiary);}
+  .stock-time{flex:1;min-width:0;font-weight:400;font-size:10px;line-height:16px;color:var(--text-tertiary);text-align:right;}
+  .divider{width:100%;height:0;border-top:1px solid var(--border-secondary);}
+  .order-type{display:flex;flex-direction:column;gap:2px;width:90.667px;}
+  .order-type .label{font-weight:400;font-size:10px;line-height:16px;color:var(--text-tertiary);}
+  .order-type .value{font-weight:700;font-size:12px;line-height:18px;color:var(--text-primary);white-space:nowrap;}
+  .stock-foot{display:flex;gap:8px;align-items:center;width:100%;}
+  .price-row{flex:1;min-width:0;display:flex;align-items:center;}
+  .price{font-weight:700;font-size:14px;line-height:20px;color:var(--market-green);white-space:nowrap;}
+  .price-move{display:flex;align-items:center;justify-content:flex-end;color:var(--market-green);}
+  .price-move .ph{width:16px;height:16px;}
+  .price-delta{font-weight:400;font-size:10px;line-height:16px;color:var(--market-green);white-space:nowrap;text-align:right;}
+  .btn-beli{
+    width:140px;height:32px;display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px;background:var(--interactive-enabled);border-radius:4px;flex-shrink:0;
+    font-weight:700;font-size:14px;line-height:20px;color:#fff;white-space:nowrap;
+    border:none;cursor:pointer;font-family:'Lato',sans-serif;
+  }
+
+  /* Ticker chip */
+  .chip-row{display:flex;flex-wrap:wrap;row-gap:8px;width:100%;}
+  .ticker-chip{
+    display:flex;gap:4px;align-items:flex-start;padding:4px 8px;
+    border:1px solid var(--border-secondary);border-radius:8px;
+    font-weight:700;font-size:12px;line-height:18px;white-space:nowrap;
+  }
+  .ticker-chip .code{color:var(--text-tertiary);}
+  .ticker-chip .change{color:var(--market-green);}
+
+  /* Engagement row */
+  .engage{display:flex;gap:24px;align-items:flex-start;width:100%;}
+  .engage-left{flex:1;min-width:0;display:flex;gap:24px;align-items:center;}
+  .engage-item{display:flex;gap:4px;align-items:center;}
+  .engage-item .count{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);white-space:nowrap;}
+
+
+
+
+  .avatar-sil{width:100%;height:100%;display:block;border-radius:50%;}
+  .bank-logo{
+    width:20px;height:20px;border-radius:50%;background:#fff;border:1px solid var(--border-secondary);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+  }
+  .bank-logo img{width:15px;height:auto;display:block;}
+
+
+
+  /* ── Compose screen ── */
+  .compose-title{flex:1;min-width:0;padding:0 8px;font-weight:700;font-size:18px;line-height:24px;color:var(--text-primary);}
+  .posting-action{
+    height:40px;display:flex;align-items:center;padding:0 8px;background:none;border:none;
+    font-family:'Lato',sans-serif;font-weight:700;font-size:14px;line-height:20px;
+    color:var(--text-subdued);cursor:not-allowed;-webkit-tap-highlight-color:transparent;transition:color .15s;
+  }
+  .posting-action.enabled{color:var(--interactive-enabled);cursor:pointer;}
+  .compose-author{display:flex;gap:12px;align-items:center;padding:4px 16px;width:100%;flex-shrink:0;}
+  .compose-handle{font-weight:700;font-size:14px;line-height:20px;color:var(--text-primary);white-space:nowrap;}
+  .audience{display:flex;gap:2px;align-items:center;color:var(--text-secondary);background:none;border:none;padding:0;cursor:pointer;font-family:'Lato',sans-serif;}
+  .audience .ph{width:12px;height:12px;color:var(--text-secondary);}
+  .audience span{font-weight:400;font-size:10px;line-height:16px;white-space:nowrap;}
+  .compose-body{flex:1;min-height:0;width:100%;padding:12px;}
+  .compose-body textarea{
+    width:100%;height:100%;border:none;outline:none;resize:none;background:transparent;
+    font-family:'Lato',sans-serif;font-weight:400;font-size:14px;line-height:20px;color:var(--text-primary);
+  }
+  .compose-body textarea::placeholder{color:var(--text-subdued);}
+  .compose-footer{
+    flex-shrink:0;background:#fff;display:flex;gap:12px;align-items:center;
+    padding:16px 16px 24px;width:100%;
+  }
+  .tipe-feed{display:flex;gap:2px;align-items:center;justify-content:center;background:none;border:none;padding:0;cursor:pointer;font-family:'Lato',sans-serif;color:var(--text-tertiary);}
+  .tipe-feed .ph{width:24px;height:24px;}
+  .tipe-feed span{font-weight:400;font-size:10px;line-height:16px;white-space:nowrap;}
+  .compose-footer > .ph{width:24px;height:24px;color:var(--text-tertiary);}
+
+  /* ── FAB ── */
+  .fab{
+    position:absolute;right:16px;bottom:16px;z-index:10;
+    width:64px;height:64px;border-radius:32px;border:none;cursor:pointer;
+    background:var(--interactive-enabled);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 16px -4px rgba(96,122,141,.15);
+    -webkit-tap-highlight-color:transparent;
+    transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .fab:active{transform:scale(.92);box-shadow:0 4px 8px -4px rgba(96,122,141,.2);}
+  .fab svg{width:24px;height:24px;display:block;}
+  .field-pulse{animation:field-pulse 1s ease;}
+  @keyframes field-pulse{
+    0%,100%{border-color:var(--border-tertiary);box-shadow:none;}
+    30%{border-color:var(--interactive-enabled);box-shadow:0 0 0 3px rgba(58,131,249,.2);}
+  }
+
+  /* ── App shell / navigation ── */
+  .screen{height:min(800px,calc(100vh - 48px));position:relative;}
+  .screen-scroll{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:none;}
+  .screen-scroll::-webkit-scrollbar{display:none;}
+  .screen[hidden]{display:none;}
+  .screen.enter{animation:screen-in .25s ease-out;}
+  @keyframes screen-in{from{opacity:.4;transform:translateX(24px);}to{opacity:1;transform:none;}}
+  .screen.enter-back{animation:screen-back .25s ease-out;}
+  @keyframes screen-back{from{opacity:.4;transform:translateX(-24px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion: reduce){.screen.enter,.screen.enter-back{animation:none;}}
+  .comment-btn{background:none;border:none;padding:0;cursor:pointer;color:var(--text-tertiary);font-family:'Lato',sans-serif;-webkit-tap-highlight-color:transparent;}
+
+  /* ── Detail top bar (white) ── */
+  .topbar-light{background:#fff;display:flex;flex-direction:column;height:76px;justify-content:center;flex-shrink:0;border-bottom:1px solid var(--border-secondary);}
+  .topbar-light .statusbar{color:var(--text-primary);}
+  .topbar-light .statusbar .time{color:var(--text-primary);}
+  .title-area-light{display:flex;align-items:center;padding:0 8px;}
+  .back-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-primary);background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+  .back-btn .ph{width:24px;height:24px;}
+  .title-spacer{flex:1;height:52px;}
+
+  /* ── Comments ── */
+  .comment-block{display:flex;flex-direction:column;gap:8px;padding:12px 16px;width:100%;background:#fff;border-bottom:1px solid var(--border-secondary);}
+  .comment-text{width:100%;font-weight:400;font-size:14px;line-height:20px;color:var(--text-secondary);}
+  .comment-text b{font-weight:700;}
+  .indent{padding-left:24px;}
+  .author-tag{display:flex;gap:4px;align-items:center;font-size:12px;line-height:18px;color:var(--text-tertiary);}
+  .author-tag b{font-weight:700;}
+  .see-replies{display:flex;gap:4px;align-items:center;width:100%;}
+  .see-replies .label{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);white-space:nowrap;}
+  .avatar-18.more-circle{background:var(--surface-secondary);border:1px solid #fff;display:flex;align-items:center;justify-content:center;color:var(--text-tertiary);}
+  .avatar-18.more-circle .ph{width:12px;height:12px;}
+
+  /* ── Footer composer ── */
+  .footer-compose{
+    flex-shrink:0;background:#fff;display:flex;flex-direction:column;gap:12px;
+    padding:16px 16px 24px;box-shadow:0 -2px 8px -2px rgba(96,122,141,.15);
+  }
+  .footer-compose input{
+    width:100%;height:40px;padding:12px 16px;border:1px solid var(--border-tertiary);border-radius:4px;
+    font-family:'Lato',sans-serif;font-size:14px;line-height:20px;color:var(--text-primary);outline:none;
+  }
+  .footer-compose input::placeholder{color:var(--text-subdued);}
+  .footer-compose input:focus{border-color:var(--interactive-enabled);}
+  .compose-row{display:flex;gap:12px;align-items:center;width:100%;color:var(--text-tertiary);}
+  .compose-row .ph{width:24px;height:24px;}
+  .char-count{flex:1;min-width:0;font-weight:400;font-size:12px;line-height:18px;color:var(--text-subdued);text-align:right;}
+  .btn-balas{
+    height:32px;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:4px;border:none;
+    background:var(--border-secondary);color:var(--text-subdued);font-family:'Lato',sans-serif;
+    font-weight:700;font-size:14px;line-height:20px;white-space:nowrap;cursor:not-allowed;transition:background .15s,color .15s;
+  }
+  .btn-balas.enabled{background:var(--interactive-enabled);color:#fff;cursor:pointer;}
+
+  /* Like interaction */
+  .like-btn{
+    display:flex;gap:4px;align-items:center;background:none;border:none;padding:0;
+    cursor:pointer;font-family:'Lato',sans-serif;color:var(--text-tertiary);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .like-btn .count{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);white-space:nowrap;min-width:14px;text-align:left;}
+  .like-btn .ic-24{position:relative;}
+  .like-btn .ph-fill{display:none;}
+  .like-btn.liked{color:var(--interactive-enabled);}
+  .like-btn.liked .ph-line{display:none;}
+  .like-btn.liked .ph-fill{display:block;}
+  .like-btn.liked .count{color:var(--interactive-enabled);font-weight:700;}
+  .like-btn.pop .ic-24{animation:like-pop .35s cubic-bezier(.2,1.6,.4,1);}
+  @keyframes like-pop{
+    0%{transform:scale(1);}
+    35%{transform:scale(.75);}
+    70%{transform:scale(1.25);}
+    100%{transform:scale(1);}
+  }
+  .like-btn .burst{
+    position:absolute;inset:-6px;border-radius:50%;pointer-events:none;
+    border:2px solid var(--interactive-enabled);opacity:0;transform:scale(.4);
+  }
+  .like-btn.pop .burst{animation:like-burst .4s ease-out;}
+  @keyframes like-burst{
+    0%{opacity:.6;transform:scale(.4);}
+    100%{opacity:0;transform:scale(1.3);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .like-btn.pop .ic-24,.like-btn.pop .burst{animation:none;}
+  }
+
+  /* Liked by */
+  .liked-by{display:flex;gap:4px;align-items:flex-start;width:100%;}
+  .liked-avatars{display:flex;align-items:center;}
+  .avatar-18{
+    width:18px;height:18px;border-radius:40px;overflow:hidden;flex-shrink:0;position:relative;
+  }
+  .liked-avatars .avatar-18{border:1px solid #fff;}
+  .avatar-18.stacked{margin-right:-8px;}
+  .avatar-18 img{position:absolute;inset:0;width:100%;height:100%;}
+  .liked-text{font-weight:400;font-size:12px;line-height:18px;color:var(--text-tertiary);white-space:nowrap;}
+  .liked-text b{font-weight:700;}
+
+  /* Comment preview */
+  .comment-preview{
+    display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;
+    width:100%;padding:8px;background:var(--surface-secondary);border-radius:12px;
+  }
+  .comment-head{display:flex;gap:12px;align-items:center;width:100%;}
+  .comment-name{font-weight:700;font-size:12px;line-height:18px;color:var(--text-primary);white-space:nowrap;}
+  .comment-body{width:100%;font-weight:400;font-size:14px;line-height:20px;color:var(--text-secondary);}
+  .comment-body b{font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- Phosphor icon sprite (phosphoricons.com, MIT) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ph-magnifying-glass" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></symbol>
+  <symbol id="ph-chats" viewBox="0 0 256 256"><path d="M216,80H184V48a16,16,0,0,0-16-16H40A16,16,0,0,0,24,48V176a8,8,0,0,0,13,6.22L72,154V184a16,16,0,0,0,16,16h93.59L219,230.22a8,8,0,0,0,5,1.78,8,8,0,0,0,8-8V96A16,16,0,0,0,216,80ZM66.55,137.78,40,159.25V48H168v88H71.58A8,8,0,0,0,66.55,137.78ZM216,207.25l-26.55-21.47a8,8,0,0,0-5-1.78H88V152h80a16,16,0,0,0,16-16V96h32Z"/></symbol>
+  <symbol id="ph-dots-three-vertical" viewBox="0 0 256 256"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"/></symbol>
+  <symbol id="ph-funnel" viewBox="0 0 256 256"><path d="M230.6,49.53A15.81,15.81,0,0,0,216,40H40A16,16,0,0,0,28.19,66.76l.08.09L96,139.17V216a16,16,0,0,0,24.87,13.32l32-21.34A16,16,0,0,0,160,194.66V139.17l67.74-72.32.08-.09A15.8,15.8,0,0,0,230.6,49.53ZM40,56h0Zm106.18,74.58A8,8,0,0,0,144,136v58.66L112,216V136a8,8,0,0,0-2.16-5.47L40,56H216Z"/></symbol>
+  <symbol id="ph-thumbs-up" viewBox="0 0 256 256"><path d="M234,80.12A24,24,0,0,0,216,72H160V56a40,40,0,0,0-40-40,8,8,0,0,0-7.16,4.42L75.06,96H32a16,16,0,0,0-16,16v88a16,16,0,0,0,16,16H204a24,24,0,0,0,23.82-21l12-96A24,24,0,0,0,234,80.12ZM32,112H72v88H32ZM223.94,97l-12,96a8,8,0,0,1-7.94,7H88V105.89l36.71-73.43A24,24,0,0,1,144,56V80a8,8,0,0,0,8,8h64a8,8,0,0,1,7.94,9Z"/></symbol>
+  <symbol id="ph-chat-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></symbol>
+  <symbol id="ph-share-fat" viewBox="0 0 256 256"><path d="M237.66,106.35l-80-80A8,8,0,0,0,144,32V72.35c-25.94,2.22-54.59,14.92-78.16,34.91-28.38,24.08-46.05,55.11-49.76,87.37a12,12,0,0,0,20.68,9.58h0c11-11.71,50.14-48.74,107.24-52V192a8,8,0,0,0,13.66,5.65l80-80A8,8,0,0,0,237.66,106.35ZM160,172.69V144a8,8,0,0,0-8-8c-28.08,0-55.43,7.33-81.29,21.8a196.17,196.17,0,0,0-36.57,26.52c5.8-23.84,20.42-46.51,42.05-64.86C99.41,99.77,127.75,88,152,88a8,8,0,0,0,8-8V51.32L220.69,112Z"/></symbol>
+  <symbol id="ph-caret-up-fill" viewBox="0 0 256 256"><path d="M215.39,163.06A8,8,0,0,1,208,168H48a8,8,0,0,1-5.66-13.66l80-80a8,8,0,0,1,11.32,0l80,80A8,8,0,0,1,215.39,163.06Z"/></symbol>
+  <symbol id="ph-shield-check-fill" viewBox="0 0 256 256"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm-34.32,69.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+  <symbol id="ph-star-fill" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"/></symbol>
+  <symbol id="ph-wifi-high-fill" viewBox="0 0 256 256"><path d="M244.35,92.8l-104,125.43A15.93,15.93,0,0,1,128,224h0a15.93,15.93,0,0,1-12.31-5.77L11.65,92.8A15.65,15.65,0,0,1,8.11,80.91,15.93,15.93,0,0,1,14.28,70.1,186.67,186.67,0,0,1,128,32,186.67,186.67,0,0,1,241.72,70.1a15.93,15.93,0,0,1,6.17,10.81A15.65,15.65,0,0,1,244.35,92.8Z"/></symbol>
+  <symbol id="ph-cell-signal-full-fill" viewBox="0 0 256 256"><path d="M208,40V200a16,16,0,0,1-16,16H32A16,16,0,0,1,20.7,188.68l160-160A16,16,0,0,1,208,40Z"/></symbol>
+  <symbol id="ph-battery-full-fill" viewBox="0 0 256 256"><path d="M200,56H32A24,24,0,0,0,8,80v96a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V80A24,24,0,0,0,200,56Zm8,120a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H200a8,8,0,0,1,8,8ZM192,96v64a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V96a8,8,0,0,1,8-8H184A8,8,0,0,1,192,96Zm64,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z"/></symbol>
+  <symbol id="ph-thumbs-up-fill" viewBox="0 0 256 256"><path d="M234,80.12A24,24,0,0,0,216,72H160V56a40,40,0,0,0-40-40,8,8,0,0,0-7.16,4.42L75.06,96H32a16,16,0,0,0-16,16v88a16,16,0,0,0,16,16H204a24,24,0,0,0,23.82-21l12-96A24,24,0,0,0,234,80.12ZM32,112H72v88H32Z"/></symbol>
+  <symbol id="ph-caret-left" viewBox="0 0 256 256"><path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"/></symbol>
+  <symbol id="ph-currency-dollar-simple" viewBox="0 0 256 256"><path d="M200,168a48.05,48.05,0,0,1-48,48H136v16a8,8,0,0,1-16,0V216H104a48.05,48.05,0,0,1-48-48,8,8,0,0,1,16,0,32,32,0,0,0,32,32h48a32,32,0,0,0,0-64H112a48,48,0,0,1,0-96h8V24a8,8,0,0,1,16,0V40h8a48.05,48.05,0,0,1,48,48,8,8,0,0,1-16,0,32,32,0,0,0-32-32H112a32,32,0,0,0,0,64h40A48.05,48.05,0,0,1,200,168Z"/></symbol>
+  <symbol id="ph-image" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></symbol>
+  <symbol id="ph-dots-three" viewBox="0 0 256 256"><path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128Zm56-12a12,12,0,1,0,12,12A12,12,0,0,0,196,116ZM60,116a12,12,0,1,0,12,12A12,12,0,0,0,60,116Z"/></symbol>
+  <symbol id="avatar-silhouette" viewBox="0 0 40 40">
+    <clipPath id="sil-clip"><circle cx="20" cy="20" r="20"/></clipPath>
+    <g clip-path="url(#sil-clip)">
+      <circle cx="20" cy="20" r="20" fill="#3A83F9"/>
+      <circle cx="20" cy="15.5" r="6.5" fill="#fff"/>
+      <path d="M20 24.5c-7.2 0-12.4 4.4-13 10.6V40h26v-4.9c-.6-6.2-5.8-10.6-13-10.6z" fill="#fff"/>
+    </g>
+  </symbol>
+  <symbol id="ph-globe" viewBox="0 0 256 256"><path d="M128,24h0A104,104,0,1,0,232,128,104.12,104.12,0,0,0,128,24Zm88,104a87.61,87.61,0,0,1-3.33,24H174.16a157.44,157.44,0,0,0,0-48h38.51A87.61,87.61,0,0,1,216,128ZM102,168H154a115.11,115.11,0,0,1-26,45A115.27,115.27,0,0,1,102,168Zm-3.9-16a140.84,140.84,0,0,1,0-48h59.88a140.84,140.84,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.84a157.44,157.44,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154,88H102a115.11,115.11,0,0,1,26-45A115.27,115.27,0,0,1,154,88Zm52.33,0H170.71a135.28,135.28,0,0,0-22.3-45.6A88.29,88.29,0,0,1,206.37,88ZM107.59,42.4A135.28,135.28,0,0,0,85.29,88H49.63A88.29,88.29,0,0,1,107.59,42.4ZM49.63,168H85.29a135.28,135.28,0,0,0,22.3,45.6A88.29,88.29,0,0,1,49.63,168Zm98.78,45.6a135.28,135.28,0,0,0,22.3-45.6h35.66A88.29,88.29,0,0,1,148.41,213.6Z"/></symbol>
+  <symbol id="ph-caret-down" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
+  <symbol id="ph-plus" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></symbol>
+</svg>
+
+<div class="screen" id="screen-feed">
+<div class="screen-scroll">
+
+  <!-- ══ Top Bar ══ -->
+  <div class="topbar">
+    <div class="statusbar">
+      <svg class="ph"><use href="#ph-wifi-high-fill"/></svg>
+      <svg class="ph"><use href="#ph-cell-signal-full-fill"/></svg>
+      <svg class="ph"><use href="#ph-battery-full-fill"/></svg>
+      <span class="time">12:30</span>
+    </div>
+    <div class="title-area">
+      <div class="search-wrapper">
+        <div class="search">
+          <svg class="ph"><use href="#ph-magnifying-glass"/></svg>
+          <p>Cari di Feed</p>
+        </div>
+      </div>
+      <div class="action-40">
+        <svg class="ph"><use href="#ph-chats"/></svg>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab active">
+        <div class="label">Feed</div>
+        <div class="highlight"></div>
+      </div>
+      <div class="tab">
+        <div class="label">Berita</div>
+        <div class="highlight"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Composer + Pills ══ -->
+  <div class="composer">
+    <div class="composer-row">
+      <div class="avatar-40">
+        <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
+      </div>
+      <div class="text-field" onclick="openCompose()" style="cursor:pointer;"><p>Posting Ide Tradingmu</p></div>
+    </div>
+    <div class="pills">
+      <div class="pill pill-filter">
+        <svg class="ph"><use href="#ph-funnel"/></svg>
+      </div>
+      <div class="pills-scroll">
+        <div class="pill pill-active">Trending</div>
+        <div class="pill pill-default">Following</div>
+        <div class="pill pill-default">All</div>
+        <div class="pill pill-default">People</div>
+        <div class="pill pill-default">Watchlist</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Post 1 — RatuBanteng ══ -->
+  <div class="post">
+    <div class="post-header">
+      <div class="avatar-32 avatar-photo-1"></div>
+      <div class="post-name-col">
+        <div class="post-name-row">
+          <span class="post-name">RatuBanteng</span>
+          <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+        </div>
+        <span class="post-time">01 Sep 2023, 15:30</span>
+      </div>
+      <div class="post-actions">
+        <button class="follow" aria-pressed="false">+ Ikuti</button>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+    </div>
+
+    <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+
+    <div class="stock-widget">
+      <div class="stock-head">
+        <span class="bank-logo" title="Bank Central Asia"><svg viewBox="0 0 40 18" style="width:15px;display:block;"><text x="20" y="14" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="15" fill="#0060AF" letter-spacing="-0.5">BCA</text></svg></span>
+        <div class="stock-title">
+          <span class="stock-ticker">BBCA</span>
+          <span class="stock-company">Bank Central Asia</span>
+        </div>
+        <span class="stock-time">01 Sep 2024, 13:42:60</span>
+      </div>
+      <div class="divider"></div>
+      <div class="order-type">
+        <span class="label">Harga</span>
+        <span class="value">Rp8.000</span>
+      </div>
+      <div class="divider"></div>
+      <div class="stock-foot">
+        <div class="price-row">
+          <span class="price">8.050</span>
+          <div class="price-move">
+            <svg class="ph"><use href="#ph-caret-up-fill"/></svg>
+            <span class="price-delta">100 (+13%)</span>
+          </div>
+        </div>
+        <button class="btn-beli">Beli</button>
+      </div>
+    </div>
+
+    <div class="chip-row">
+      <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+    </div>
+
+    <div class="engage">
+      <div class="engage-left">
+        <button class="like-btn" aria-pressed="false" aria-label="Suka">
+          <span class="ic-24">
+            <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+            <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+            <span class="burst"></span>
+          </span>
+          <span class="count" data-count="50">50</span>
+        </button>
+        <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+          <span class="count">20</span>
+        </button>
+      </div>
+      <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+    </div>
+
+    <div class="liked-by">
+      <div class="liked-avatars">
+        <div class="avatar-18 stacked avatar-photo-4"></div>
+        <div class="avatar-18 stacked avatar-photo-5"></div>
+        <div class="avatar-18 avatar-photo-2"></div>
+      </div>
+      <span class="liked-text">Disukai oleh</span>
+      <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+    </div>
+
+    <div class="comment-preview">
+      <div class="comment-head">
+        <div class="avatar-32">
+          <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
+        </div>
+        <div class="post-name-col">
+          <div class="post-name-row" style="gap:4px;">
+            <span class="comment-name">ShirohigePirate</span>
+            <span class="badge-16 badge-star"><svg class="ph"><use href="#ph-star-fill"/></svg></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+      </div>
+      <div class="comment-body">
+        <p><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya. Jadi PE sekarang ya 4.8x which is masih dibawah peers. Makin bawah makin bagus. </p>
+        <p>Kalau Sector kayaknya PE9x cuman kayaknya Coal bakal di hargain market di range PE6-7 at max. Jadi ya 10-12k...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Post 2 — Nikathesun ══ -->
+  <div class="post">
+    <div class="post-header">
+      <div class="avatar-32 avatar-photo-6"></div>
+      <div class="post-name-col">
+        <div class="post-name-row">
+          <span class="post-name">Nikathesun</span>
+          <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+        </div>
+        <span class="post-time">01 Sep 2023, 15:30</span>
+      </div>
+      <div class="post-actions">
+        <button class="follow" aria-pressed="false">+ Ikuti</button>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+    </div>
+
+    <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+
+    <div class="chip-row">
+      <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+    </div>
+
+    <div class="engage">
+      <div class="engage-left">
+        <button class="like-btn" aria-pressed="false" aria-label="Suka">
+          <span class="ic-24">
+            <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+            <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+            <span class="burst"></span>
+          </span>
+          <span class="count" data-count="50">50</span>
+        </button>
+        <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+        </button>
+      </div>
+      <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+    </div>
+
+    <div class="liked-by">
+      <div class="liked-avatars">
+        <div class="avatar-18 stacked avatar-photo-4"></div>
+        <div class="avatar-18 stacked avatar-photo-5"></div>
+        <div class="avatar-18 avatar-photo-2"></div>
+      </div>
+      <span class="liked-text">Disukai oleh</span>
+      <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+    </div>
+  </div>
+
+  <!-- ══ Post 3 — kurohige ══ -->
+  <div class="post">
+    <div class="post-header">
+      <div class="avatar-32 avatar-photo-3"></div>
+      <div class="post-name-col">
+        <div class="post-name-row">
+          <span class="post-name">kurohige</span>
+        </div>
+        <span class="post-time">01 Sep 2023, 15:30</span>
+      </div>
+      <div class="post-actions">
+        <button class="follow" aria-pressed="false">+ Ikuti</button>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+    </div>
+
+    <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+
+    <div class="chip-row">
+      <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+    </div>
+
+    <div class="engage">
+      <div class="engage-left">
+        <button class="like-btn" aria-pressed="false" aria-label="Suka">
+          <span class="ic-24">
+            <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+            <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+            <span class="burst"></span>
+          </span>
+          <span class="count" data-count="50">50</span>
+        </button>
+        <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+        </button>
+      </div>
+      <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+    </div>
+
+    <div class="liked-by">
+      <div class="liked-avatars">
+        <div class="avatar-18 stacked avatar-photo-4"></div>
+        <div class="avatar-18 stacked avatar-photo-5"></div>
+        <div class="avatar-18 avatar-photo-2"></div>
+      </div>
+      <span class="liked-text">Disukai oleh</span>
+      <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+    </div>
+  </div>
+
+</div><!-- /screen-scroll (feed) -->
+<button class="fab" onclick="openCompose()" aria-label="Tulis postingan">
+  <svg viewBox="32 24 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M49.0572 25.0572C50.6825 23.4319 53.3175 23.4319 54.9428 25.0572C56.5681 26.6825 56.5681 29.3176 54.9428 30.9428L46.2761 39.6095C46.1053 39.7804 45.8912 39.9016 45.6567 39.9602L40.3234 41.2935C39.869 41.4071 39.3884 41.274 39.0572 40.9428C38.726 40.6117 38.5929 40.131 38.7065 39.6766L40.0398 34.3433C40.0984 34.1089 40.2196 33.8948 40.3905 33.7239L49.0572 25.0572ZM53.0572 26.9428C52.4733 26.359 51.5267 26.359 50.9428 26.9428L50.5523 27.3334L52.6667 29.4477L53.0572 29.0572C53.6411 28.4733 53.6411 27.5267 53.0572 26.9428ZM50.781 31.3334L48.6667 29.219L42.5373 35.3483L41.8325 38.1675L44.6517 37.4627L50.781 31.3334ZM32 28C32 27.2636 32.597 26.6667 33.3333 26.6667H40C40.7364 26.6667 41.3333 27.2636 41.3333 28C41.3333 28.7364 40.7364 29.3334 40 29.3334H34.6667V45.3333H52V40C52 39.2636 52.597 38.6667 53.3333 38.6667C54.0697 38.6667 54.6667 39.2636 54.6667 40V46.6667C54.6667 47.4031 54.0697 48 53.3333 48H33.3333C32.597 48 32 47.4031 32 46.6667V28Z" fill="white"/>
+  </svg>
+</button>
+
+</div><!-- /screen-feed -->
+
+<!-- ══════════ Screen 2 — Creator Reply (node 1:1854) ══════════ -->
+<div class="screen" id="screen-detail" hidden>
+  <div class="topbar-light">
+    <div class="statusbar">
+      <svg class="ph"><use href="#ph-wifi-high-fill"/></svg>
+      <svg class="ph"><use href="#ph-cell-signal-full-fill"/></svg>
+      <svg class="ph"><use href="#ph-battery-full-fill"/></svg>
+      <span class="time">12:30</span>
+    </div>
+    <div class="title-area-light">
+      <button class="back-btn" onclick="closeDetail()" aria-label="Kembali">
+        <svg class="ph"><use href="#ph-caret-left"/></svg>
+      </button>
+      <div class="title-spacer"></div>
+      <span class="ic-24" style="margin:8px;"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+    </div>
+  </div>
+
+  <div class="screen-scroll">
+    <!-- Original post -->
+    <div class="post">
+      <div class="post-header">
+        <div class="avatar-32 avatar-photo-1"></div>
+        <div class="post-name-col">
+          <div class="post-name-row">
+            <span class="post-name">RatuBanteng</span>
+            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <div class="post-actions">
+          <button class="follow" aria-pressed="false">+ Ikuti</button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+        </div>
+      </div>
+
+      <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+
+      <div class="stock-widget">
+        <div class="stock-head">
+          <span class="bank-logo" title="Bank Central Asia"><svg viewBox="0 0 40 18" style="width:15px;display:block;"><text x="20" y="14" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="15" fill="#0060AF" letter-spacing="-0.5">BCA</text></svg></span>
+          <div class="stock-title">
+            <span class="stock-ticker">BBCA</span>
+            <span class="stock-company">Bank Central Asia</span>
+          </div>
+          <span class="stock-time">01 Sep 2024, 13:42:60</span>
+        </div>
+        <div class="divider"></div>
+        <div class="order-type">
+          <span class="label">Harga</span>
+          <span class="value">Rp8.000</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stock-foot">
+          <div class="price-row">
+            <span class="price">8.050</span>
+            <div class="price-move">
+              <svg class="ph"><use href="#ph-caret-up-fill"/></svg>
+              <span class="price-delta">100 (+13%)</span>
+            </div>
+          </div>
+          <button class="btn-beli">Beli</button>
+        </div>
+      </div>
+
+      <div class="chip-row">
+        <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+      </div>
+
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24">
+              <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+              <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+              <span class="burst"></span>
+            </span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <div class="engage-item">
+            <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+            <span class="count">20</span>
+          </div>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span>
+      </div>
+
+      <div class="liked-by">
+        <div class="liked-avatars">
+          <div class="avatar-18 stacked avatar-photo-4"></div>
+          <div class="avatar-18 stacked avatar-photo-5"></div>
+          <div class="avatar-18 avatar-photo-2"></div>
+        </div>
+        <span class="liked-text">Disukai oleh</span>
+        <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
+      </div>
+    </div>
+
+    <!-- Comment 1 + author reply -->
+    <div class="comment-block">
+      <div class="post-header">
+        <div class="avatar-32">
+          <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
+        </div>
+        <div class="post-name-col">
+          <div class="post-name-row">
+            <span class="post-name">ShirohigePirate</span>
+            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+      <p class="comment-text"><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24">
+              <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+              <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+              <span class="burst"></span>
+            </span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+        </div>
+      </div>
+
+      <div class="post-header indent">
+        <div class="avatar-32 avatar-photo-1"></div>
+        <div class="post-name-col">
+          <div class="post-name-row">
+            <span class="post-name">RatuBanteng</span>
+            <span class="badge-16 badge-expert"><svg class="ph"><use href="#ph-shield-check-fill"/></svg></span>
+            <span class="author-tag">•&nbsp;<b>Penulis</b></span>
+          </div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+      <p class="comment-text indent"><b>@ShirohigePirate</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+
+      <div class="see-replies indent">
+        <div class="liked-avatars">
+          <div class="avatar-18 stacked avatar-photo-4"></div>
+          <div class="avatar-18 stacked avatar-photo-5"></div>
+          <div class="avatar-18 more-circle"><svg class="ph"><use href="#ph-dots-three"/></svg></div>
+        </div>
+        <span class="label">Lihat semua balasan</span>
+      </div>
+    </div>
+
+    <!-- Comment 2 -->
+    <div class="comment-block">
+      <div class="post-header">
+        <div class="avatar-32 avatar-photo-3"></div>
+        <div class="post-name-col">
+          <div class="post-name-row"><span class="post-name">kurohige</span></div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+      <p class="comment-text"><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24">
+              <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+              <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+              <span class="burst"></span>
+            </span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 3 -->
+    <div class="comment-block">
+      <div class="post-header">
+        <div class="avatar-32 avatar-photo-6"></div>
+        <div class="post-name-col">
+          <div class="post-name-row"><span class="post-name">Nikathesun</span></div>
+          <span class="post-time">01 Sep 2023, 15:30</span>
+        </div>
+        <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
+      </div>
+      <p class="comment-text"><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <div class="engage">
+        <div class="engage-left">
+          <button class="like-btn" aria-pressed="false" aria-label="Suka">
+            <span class="ic-24">
+              <svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>
+              <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
+              <span class="burst"></span>
+            </span>
+            <span class="count" data-count="50">50</span>
+          </button>
+          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div><!-- /screen-scroll (detail) -->
+
+  <!-- Footer composer -->
+  <div class="footer-compose">
+    <input id="reply-input" type="text" maxlength="5000" placeholder="Tulis komentar di sini..." autocomplete="off">
+    <div class="compose-row">
+      <svg class="ph"><use href="#ph-currency-dollar-simple"/></svg>
+      <svg class="ph"><use href="#ph-image"/></svg>
+      <span class="char-count" id="char-count">0/5000</span>
+      <button class="btn-balas" id="btn-balas" disabled>Balas</button>
+    </div>
+  </div>
+</div><!-- /screen-detail -->
+
+<!-- ══════════ Screen 3 — Buat Postingan (node 12:1298) ══════════ -->
+<div class="screen" id="screen-compose" hidden>
+  <div class="topbar-light" style="border-bottom:none;">
+    <div class="statusbar">
+      <svg class="ph"><use href="#ph-wifi-high-fill"/></svg>
+      <svg class="ph"><use href="#ph-cell-signal-full-fill"/></svg>
+      <svg class="ph"><use href="#ph-battery-full-fill"/></svg>
+      <span class="time">12:30</span>
+    </div>
+    <div class="title-area-light">
+      <button class="back-btn" onclick="closeCompose()" aria-label="Kembali">
+        <svg class="ph"><use href="#ph-caret-left"/></svg>
+      </button>
+      <div class="compose-title">Buat Postingan</div>
+      <button class="posting-action" id="btn-posting" disabled>Posting</button>
+    </div>
+  </div>
+
+  <div class="compose-author">
+    <div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>
+    <div class="post-name-col">
+      <span class="compose-handle">@userprofile</span>
+      <button class="audience">
+        <svg class="ph"><use href="#ph-globe"/></svg>
+        <span>Untuk Semua orang</span>
+        <svg class="ph"><use href="#ph-caret-down"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="compose-body">
+    <textarea id="compose-input" maxlength="5000" placeholder="Tulis ide kamu di sini..."></textarea>
+  </div>
+
+  <div class="compose-footer">
+    <button class="tipe-feed">
+      <svg class="ph"><use href="#ph-plus"/></svg>
+      <span>Tipe Feed</span>
+    </button>
+    <svg class="ph"><use href="#ph-image"/></svg>
+    <span class="char-count" id="compose-count">0/5000</span>
+  </div>
+</div><!-- /screen-compose -->
+
+
+<script>
+document.querySelectorAll('.follow').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var on = btn.classList.toggle('following');
+    btn.setAttribute('aria-pressed', on);
+    btn.textContent = on ? 'Diikuti' : '+ Ikuti';
+  });
+});
+function bindLike(btn){
+  btn.addEventListener('click', function(){
+    var liked = btn.classList.toggle('liked');
+    btn.setAttribute('aria-pressed', liked);
+    var countEl = btn.querySelector('.count');
+    var base = parseInt(countEl.dataset.count, 10);
+    countEl.textContent = liked ? base + 1 : base;
+    btn.classList.remove('pop');
+    if (liked) { void btn.offsetWidth; btn.classList.add('pop'); }
+  });
+}
+document.querySelectorAll('.like-btn').forEach(bindLike);
+
+function openCompose(){
+  document.getElementById('screen-feed').hidden=true;
+  var c=document.getElementById('screen-compose');
+  c.hidden=false;
+  c.classList.remove('enter','enter-back'); void c.offsetWidth; c.classList.add('enter');
+  setTimeout(function(){document.getElementById('compose-input').focus();},260);
+}
+function closeCompose(){
+  document.getElementById('screen-compose').hidden=true;
+  var f=document.getElementById('screen-feed');
+  f.hidden=false;
+  f.classList.remove('enter','enter-back'); void f.offsetWidth; f.classList.add('enter-back');
+}
+var composeInput=document.getElementById('compose-input'),
+    composeCount=document.getElementById('compose-count'),
+    btnPosting=document.getElementById('btn-posting');
+composeInput.addEventListener('input',function(){
+  composeCount.textContent=composeInput.value.length+'/5000';
+  var has=composeInput.value.trim().length>0;
+  btnPosting.disabled=!has;
+  btnPosting.classList.toggle('enabled',has);
+});
+btnPosting.addEventListener('click',function(){
+  if(btnPosting.disabled) return;
+  addPostToFeed(composeInput.value.trim());
+  composeInput.value=''; composeCount.textContent='0/5000';
+  btnPosting.disabled=true; btnPosting.classList.remove('enabled');
+  closeCompose();
+  document.querySelector('#screen-feed .screen-scroll').scrollTop=0;
+});
+function addPostToFeed(text){
+  var esc=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\$([A-Za-z]+)/g,'<span class="cashtag">$$$1</span>');
+  var now=new Date();
+  var months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  var stamp=('0'+now.getDate()).slice(-2)+' '+months[now.getMonth()]+' '+now.getFullYear()+', '+('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+  var post=document.createElement('div');
+  post.className='post';
+  post.innerHTML='<div class="post-header">'+
+    '<div class="avatar-32"><svg class="avatar-sil"><use href="#avatar-silhouette"/></svg></div>'+
+    '<div class="post-name-col"><div class="post-name-row"><span class="post-name">@userprofile</span></div>'+
+    '<span class="post-time">'+stamp+'</span></div>'+
+    '<span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span></div>'+
+    '<p class="post-text">'+esc+'</p>'+
+    '<div class="engage"><div class="engage-left">'+
+    '<button class="like-btn" aria-pressed="false" aria-label="Suka"><span class="ic-24">'+
+    '<svg class="ph ph-line"><use href="#ph-thumbs-up"/></svg>'+
+    '<svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>'+
+    '<span class="burst"></span></span><span class="count" data-count="0">0</span></button>'+
+    '<span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>'+
+    '</div><span class="ic-24"><svg class="ph"><use href="#ph-share-fat"/></svg></span></div>';
+  var list=document.querySelector('#screen-feed .composer').nextElementSibling;
+  document.querySelector('#screen-feed .composer').parentNode.insertBefore(post, list);
+  bindLike(post.querySelector('.like-btn'));
+}
+function openDetail(){
+  var f=document.getElementById('screen-feed'), d=document.getElementById('screen-detail');
+  f.hidden=true; d.hidden=false;
+  d.classList.remove('enter','enter-back'); void d.offsetWidth; d.classList.add('enter');
+  d.querySelector('.screen-scroll').scrollTop=0;
+}
+function closeDetail(){
+  var f=document.getElementById('screen-feed'), d=document.getElementById('screen-detail');
+  d.hidden=true; f.hidden=false;
+  f.classList.remove('enter','enter-back'); void f.offsetWidth; f.classList.add('enter-back');
+}
+var input=document.getElementById('reply-input'), counter=document.getElementById('char-count'), balas=document.getElementById('btn-balas');
+input.addEventListener('input', function(){
+  counter.textContent=input.value.length+'/5000';
+  var has=input.value.trim().length>0;
+  balas.disabled=!has;
+  balas.classList.toggle('enabled',has);
+});
+balas.addEventListener('click', function(){
+  if(balas.disabled) return;
+  input.value=''; counter.textContent='0/5000';
+  balas.disabled=true; balas.classList.remove('enabled');
+});
+</script>
+</body>
+</html>
