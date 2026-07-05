@@ -23,24 +23,22 @@
     --ajaib-blue-6:#165BCC;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
   body{
-    background:#e9edf0;
+    background:#fff;
     font-family:'Lato',sans-serif;
-    display:flex;justify-content:center;
-    padding:24px 0;
     -webkit-font-smoothing:antialiased;
   }
   .screen{
-    width:360px;
+    width:100%;max-width:480px;margin:0 auto;
     background:#fff;
     display:flex;flex-direction:column;
-    box-shadow:0 4px 24px rgba(6,9,13,.12);
     overflow:hidden;
   }
   .ph{display:block;flex-shrink:0;fill:currentColor;}
 
   /* ── Top bar ─────────────────────────── */
-  .topbar{background:var(--interactive-enabled);display:flex;flex-direction:column;}
+  .topbar{background:var(--interactive-enabled);display:flex;flex-direction:column;flex-shrink:0;}
   .statusbar{
     height:24px;display:flex;align-items:center;justify-content:flex-end;
     gap:5px;padding-right:8px;color:#fff;
@@ -241,7 +239,7 @@
   }
 
   /* ── App shell / navigation ── */
-  .screen{height:min(800px,calc(100vh - 48px));position:relative;}
+  .screen{height:100dvh;position:relative;}
   .screen-scroll{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:none;}
   .screen-scroll::-webkit-scrollbar{display:none;}
   .screen[hidden]{display:none;}
@@ -348,6 +346,7 @@
   .comment-name{font-weight:700;font-size:12px;line-height:18px;color:var(--text-primary);white-space:nowrap;}
   .comment-body{width:100%;font-weight:400;font-size:14px;line-height:20px;color:var(--text-secondary);}
   .comment-body b{font-weight:700;}
+  .clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 </style>
 </head>
 <body>
@@ -386,7 +385,6 @@
 </svg>
 
 <div class="screen" id="screen-feed">
-<div class="screen-scroll">
 
   <!-- ══ Top Bar ══ -->
   <div class="topbar">
@@ -418,6 +416,7 @@
       </div>
     </div>
   </div>
+<div class="screen-scroll">
 
   <!-- ══ Composer + Pills ══ -->
   <div class="composer">
@@ -519,7 +518,7 @@
       <span class="liked-text"><b>cici_investor</b> dan lainnya</span>
     </div>
 
-    <div class="comment-preview">
+    <div class="comment-preview" onclick="openDetail()" role="button" tabindex="0" style="cursor:pointer;">
       <div class="comment-head">
         <div class="avatar-32">
           <svg class="avatar-sil"><use href="#avatar-silhouette"/></svg>
@@ -532,9 +531,8 @@
           <span class="post-time">01 Sep 2023, 15:30</span>
         </div>
       </div>
-      <div class="comment-body">
-        <p><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya. Jadi PE sekarang ya 4.8x which is masih dibawah peers. Makin bawah makin bagus. </p>
-        <p>Kalau Sector kayaknya PE9x cuman kayaknya Coal bakal di hargain market di range PE6-7 at max. Jadi ya 10-12k...</p>
+      <div class="comment-body clamp-2">
+        <p><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya. Jadi PE sekarang ya 4.8x which is masih dibawah peers. Makin bawah makin bagus. Kalau Sector kayaknya PE9x cuman kayaknya Coal bakal di hargain market di range PE6-7 at max. Jadi ya 10-12k...</p>
       </div>
     </div>
   </div>
@@ -556,10 +554,10 @@
       </div>
     </div>
 
-    <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+    <p class="post-text">IHSG hari ini ditutup menguat 0,7% 📈 Sektor perbankan jadi motor utama. Menurutku <span class="cashtag">$BBRI</span> masih menarik di harga sekarang, valuasi belum premium. Ada yang sudah akumulasi?</p>
 
     <div class="chip-row">
-      <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+      <div class="ticker-chip"><span class="code">BBRI</span><span class="change">+2.05%</span></div>
     </div>
 
     <div class="engage">
@@ -570,7 +568,7 @@
             <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
             <span class="burst"></span>
           </span>
-          <span class="count" data-count="50">50</span>
+          <span class="count" data-count="128">128</span>
         </button>
         <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
           <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
@@ -606,10 +604,10 @@
       </div>
     </div>
 
-    <p class="post-text">📢 Saya baru saja mengirim Order beli <span class="cashtag">$BANK</span> sesuai harga Market saat ini.</p>
+    <p class="post-text">Dividen <span class="cashtag">$TLKM</span> tahun ini kira-kira berapa yield-nya ya? Masih worth it buat long term atau mending pindah ke <span class="cashtag">$ISAT</span>? 🤔</p>
 
     <div class="chip-row">
-      <div class="ticker-chip"><span class="code">ADRO</span><span class="change">+1.24%</span></div>
+      <div class="ticker-chip"><span class="code">TLKM</span><span class="change">+0.36%</span></div>
     </div>
 
     <div class="engage">
@@ -620,7 +618,7 @@
             <svg class="ph ph-fill"><use href="#ph-thumbs-up-fill"/></svg>
             <span class="burst"></span>
           </span>
-          <span class="count" data-count="50">50</span>
+          <span class="count" data-count="12">12</span>
         </button>
         <button class="engage-item comment-btn" onclick="openDetail()" aria-label="Lihat komentar">
           <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
@@ -729,7 +727,7 @@
             <span class="count" data-count="50">50</span>
           </button>
           <div class="engage-item">
-            <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+            <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
             <span class="count">20</span>
           </div>
         </div>
@@ -773,7 +771,7 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
 
@@ -811,7 +809,7 @@
         </div>
         <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
       </div>
-      <p class="comment-text"><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <p class="comment-text"><b>@RatuBanteng</b> setuju, tapi hati-hati volume beli asing mulai turun minggu ini. Jangan FOMO di harga atas.</p>
       <div class="engage">
         <div class="engage-left">
           <button class="like-btn" aria-pressed="false" aria-label="Suka">
@@ -822,7 +820,7 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
     </div>
@@ -837,7 +835,7 @@
         </div>
         <span class="ic-24"><svg class="ph"><use href="#ph-dots-three-vertical"/></svg></span>
       </div>
-      <p class="comment-text"><b>@RatuBanteng</b> salah pak, yang bener yg di post, yg di keystats SB salah, FE2025 nya 1982 sekitaran itu forecast nya.</p>
+      <p class="comment-text"><b>@RatuBanteng</b> mantap analisisnya 👍 Aku nunggu koreksi dulu baru masuk, target entry di bawah 7.900.</p>
       <div class="engage">
         <div class="engage-left">
           <button class="like-btn" aria-pressed="false" aria-label="Suka">
@@ -848,7 +846,7 @@
             </span>
             <span class="count" data-count="50">50</span>
           </button>
-          <span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span>
+          <button class="comment-btn" onclick="focusReply()" aria-label="Balas"><span class="ic-24"><svg class="ph"><use href="#ph-chat-circle"/></svg></span></button>
         </div>
       </div>
     </div>
@@ -986,6 +984,10 @@ function addPostToFeed(text){
   var list=document.querySelector('#screen-feed .composer').nextElementSibling;
   document.querySelector('#screen-feed .composer').parentNode.insertBefore(post, list);
   bindLike(post.querySelector('.like-btn'));
+}
+function focusReply(){
+  var i=document.getElementById('reply-input');
+  i.focus();
 }
 function openDetail(){
   var f=document.getElementById('screen-feed'), d=document.getElementById('screen-detail');
