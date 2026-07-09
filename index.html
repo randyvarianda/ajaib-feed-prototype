@@ -508,24 +508,21 @@
 <div class="screen" id="screen-feed">
 
   <!-- ══ Top Bar ══ -->
-  <div class="topbar">
+  <div class="topbar-light" style="border-bottom:none;">
     <div class="statusbar">
       <svg class="ph"><use href="#ph-wifi-high-fill"/></svg>
       <svg class="ph"><use href="#ph-cell-signal-full-fill"/></svg>
       <svg class="ph"><use href="#ph-battery-full-fill"/></svg>
       <span class="time">12:30</span>
     </div>
-    <div class="title-area">
-      <div class="search-wrapper">
-        <div class="search">
-          <svg class="ph"><use href="#ph-magnifying-glass"/></svg>
-          <p>Cari di Feed</p>
-        </div>
-      </div>
-      <div class="action-40">
-        <svg class="ph"><use href="#ph-chats"/></svg>
-      </div>
+    <div class="title-area-light">
+      <button class="back-btn" aria-label="Kembali">
+        <svg class="ph"><use href="#ph-caret-left"/></svg>
+      </button>
+      <div class="compose-title">Feed &amp; Berita</div>
     </div>
+  </div>
+  <div class="tabs-wrap" style="background:#fff;flex-shrink:0;">
     <div class="tabs">
       <div class="tab active">
         <div class="label">Feed</div>
